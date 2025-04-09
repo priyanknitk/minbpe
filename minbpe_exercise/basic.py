@@ -60,7 +60,7 @@ class MyBasicTokenizer(Tokenizer):
             pairs = get_stats(ids)
             if not pairs:
                 break
-            pair = max(pairs, key=pairs.get)
+            pair = min(pairs, key=lambda p: self.merges.get(p, float("inf")))
             if pair not in self.merges:
                 break
             idx = self.merges[pair]
